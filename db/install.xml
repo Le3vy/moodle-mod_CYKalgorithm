@@ -1,0 +1,15 @@
+<XMLDB PATH="mod/cykalgorithm/db" VERSION="2025032400" COMMENT="CYK plugin">
+    <TABLES>
+        <TABLE NAME="cykalgorithm" COMMENT="CYK activity instances">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="grammar" TYPE="text" NOTNULL="true"/>
+                <FIELD NAME="inputstring" TYPE="char" LENGTH="255" NOTNULL="true"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+    </TABLES>
+</XMLDB>

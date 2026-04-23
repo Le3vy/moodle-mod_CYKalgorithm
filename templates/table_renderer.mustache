@@ -1,0 +1,23 @@
+<table class="cyk-table">
+    {{#rows}}
+    <tr>
+        {{#cells}}
+        <td>
+            <select name="{{id}}" class="cyk-cell">
+                <option value=""></option>
+                {{#rules}}
+                    <option value="{{.}}">{{.}}</option>
+                {{/rules}}
+            </select>
+        </td>
+        {{/cells}}
+    </tr>
+    {{/rows}}
+</table>
+
+
+<div class="cyk-input-row">
+    {{#symbols}}
+        <span class="cyk-symbol">{{.}}</span>
+    {{/symbols}}
+</div>
