@@ -5,37 +5,33 @@ require_once($CFG->dirroot . '/course/moodleform_mod.php');
 
 class mod_cykalgorithm_mod_form extends moodleform_mod {
 
-    public function definition()
-    {
+    public function definition() {
+        global $PAGE;
+
         $mform = $this->_form;
 
-        $mform->addElement('text', 'name', get_string('name'));
+        // Activity name (required by Moodle).
+        $mform->addElement('text', 'name', get_string('name', 'cykalgorithm'));
         $mform->setType('name', PARAM_TEXT);
         $mform->addRule('name', null, 'required');
 
-
-        // -------------------------
-        // Main table field: inputstring
-        // -------------------------
+        // Input string field.
         $mform->addElement('text', 'inputstring', get_string('inputstring', 'cykalgorithm'));
         $mform->setType('inputstring', PARAM_TEXT);
         $mform->addRule('inputstring', null, 'required');
 
-        // -------------------------
-        // Rules table fields: ONE rule only
-        // -------------------------
-        $mform->addElement('text', 'lhs', get_string('lhs', 'cykalgorithm'));
-        $mform->setType('lhs', PARAM_TEXT);
-        $mform->addRule('lhs', null, 'required');
+        // Render the Mustache template that contains the dynamic rule container and template.
+        $renderer = $PAGE->get_renderer('core');
+        $mform->addElement('html', $renderer->render_from_template('mod_cykalgorithm/grammar', []));
 
-        $mform->addElement('text', 'rhs', get_string('rhs', 'cykalgorithm'));
-        $mform->setType('rhs', PARAM_TEXT);
-        $mform->addRule('rhs', null, 'required');
-
-        // -------------------------
-        // Standard action buttons
-        // -------------------------
+        // REQUIRED: add standard course module elements (adds hidden add/update fields etc).
         $this->standard_coursemodule_elements();
+
+        // Action buttons.
         $this->add_action_buttons();
+
+        // Initialize the AMD module that wires up the dynamic UI.
+        // The AMD module must expose an 'init' function.
+        $PAGE->requires->js_call_amd('mod_cykalgorithm/grammar', 'init');
     }
 }
