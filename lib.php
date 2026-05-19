@@ -10,6 +10,9 @@ function cykalgorithm_add_instance($data)
     global $DB;
     error_log("=== ADD INSTANCE DATA ===");
     error_log(print_r($data, true));
+    error_log("LHS: " . print_r($data->lhs, true));
+    error_log("RHS: " . print_r($data->rhs, true));
+
 
 
     $data->timecreated = time();

@@ -3,9 +3,10 @@
 defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot . '/course/moodleform_mod.php');
 
-class mod_cykalgorithm_mod_form extends moodleform_mod {
-
-    public function definition() {
+class mod_cykalgorithm_mod_form extends moodleform_mod
+{
+    public function definition()
+    {
         global $PAGE;
 
         $mform = $this->_form;
@@ -33,5 +34,11 @@ class mod_cykalgorithm_mod_form extends moodleform_mod {
         // Initialize the AMD module that wires up the dynamic UI.
         // The AMD module must expose an 'init' function.
         $PAGE->requires->js_call_amd('mod_cykalgorithm/grammar', 'init');
+
+        $mform->addElement('hidden', 'lhs');
+        $mform->setType('lhs', PARAM_RAW);
+
+        $mform->addElement('hidden', 'rhs');
+        $mform->setType('rhs', PARAM_RAW);
     }
 }
